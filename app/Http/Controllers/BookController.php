@@ -53,7 +53,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -61,7 +62,16 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+     $book = Book::findOrFail($id);
+     $book->update([
+        'title' => $request->title,
+        'author' => $request->author,
+        'year' => $request->year,
+        'description' => $request->description,
+
+     ]);
+
+          return redirect()->route('book.index');
     }
 
     /**
