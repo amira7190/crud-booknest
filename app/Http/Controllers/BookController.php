@@ -71,14 +71,19 @@ class BookController extends Controller
 
      ]);
 
-          return redirect()->route('book.index');
+      return redirect()->route('books.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
-    }
+{
+    $book = Book::findOrFail($id);
+    $book->delete();
+
+    return redirect()->route('books.index');
 }
+
+    }
+
